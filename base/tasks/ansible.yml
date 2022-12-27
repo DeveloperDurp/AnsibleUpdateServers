@@ -1,0 +1,19 @@
+- name: add ansible user
+  user:
+    name: ansible
+    system: yes
+
+- name: set up sudo for ansible user
+  copy:
+    src: files/sudoer_ansible
+    dest: /etc/sudoers.d/ansible
+    owner: root
+    group: root
+    mode: 0440
+
+- name: add ansible-pull cron job
+  cron:
+    name: ansible auto-provision
+    user: ansible
+    special_time: "daily"
+    job: ansible-pull -U git@github.com:DeveloperDurp/AnsibleUpdateServers.git
