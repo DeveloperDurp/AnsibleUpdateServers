@@ -1,0 +1,51 @@
+- name: add repositories
+  ansible.builtin.yum_repository:
+    name: "{{ item.name }}"
+    description: "Ansible repositories"
+    baseurl: "{{ item.baseurl }}"
+    async: yes
+    gpgkey: "{{ item.gpgkey }}"
+  with_items:  "{{ required_repositories }}"  
+
+- name: Update packages RedHat
+  yum: 
+    name: '*'
+    state: latest
+    update_cache: yes
+    update_only: yes
+  retries: 3
+  delay: 10  
+
+- name: Remove packates not needed anymore
+  yum:
+    autoremove: yes    
+  retries: 3
+  delay: 10  
+      
+- name: Install required packages RedHat
+  yum: 
+    state: latest 
+    update_cache: yes
+    pkg: "{{ item }}"
+  with_items:  "{{ required_packages }}"  
+  retries: 3
+  delay: 10  
+
+- name: Create user account
+  user: 
+    name: "{{ username }}"
+    password: "{{ userpassword }}"
+    shell: /bin/bash
+    groups: wheel
+    state: present
+    createhome: yes
+
+
+
+- name: Stop and disable unnecessary services
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  with_items: "{{ unnecessary_services }}"
+  ignore_errors: yes
