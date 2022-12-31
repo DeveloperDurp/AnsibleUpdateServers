@@ -33,6 +33,7 @@
 
 - name: set timezone
   shell: timedatectl set-timezone America/Chicago
+  ignore_errors: yes
 
 - name: Run SSH tasks
   include_tasks:
