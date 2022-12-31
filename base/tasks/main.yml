@@ -35,6 +35,6 @@
   shell: timedatectl set-timezone America/Chicago
   ignore_errors: yes
 
-- name: Run SSH tasks
+- name: Run Ansible tasks
   include_tasks:
     file: ansible.yml
