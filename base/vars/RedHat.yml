@@ -16,5 +16,6 @@ unnecessary_software:
 required_repositories:
     - {baseurl: 'https://packages.microsoft.com/rhel/8/prod/', name: 'Microsoft', gpgkey: 'https://packages.microsoft.com/keys/microsoft.asc'}    
 
-username: "user"
-userpassword: '$6$ml9etuD2RAvybIAl$xGbh95q5PIrZQxhXBRR8oHQZcb510vhDxBsdwkBBxSo6IzOfS0WkbYDUgyuu4cvczJes19c.EJjfjO2ROoRsx1'
+required_users:
+    - {username: "user", password: '$6$ml9etuD2RAvybIAl$xGbh95q5PIrZQxhXBRR8oHQZcb510vhDxBsdwkBBxSo6IzOfS0WkbYDUgyuu4cvczJes19c.EJjfjO2ROoRsx1'}
+    - {username: "administrator", password: ''}

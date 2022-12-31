@@ -33,14 +33,13 @@
 
 - name: Create user account
   user: 
-    name: "{{ username }}"
-    password: "{{ userpassword }}"
+    name: "{{ item.username }}"
+    password: "{{ item.password }}"
     shell: /bin/bash
     groups: wheel
     state: present
     createhome: yes
-
-
+  with_items:  "{{ required_users }}"
 
 - name: Stop and disable unnecessary services
   service:
