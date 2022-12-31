@@ -3,7 +3,7 @@
     path: "/home/{{ item.username }}/.ssh"
     owner: "{{ item.username }}"
     group: "{{ item.username }}"
-    mode: "0600"
+    mode: "0700"
     state: directory
   with_items:  "{{ required_users }}"
 
@@ -14,7 +14,7 @@
     force: true 
     owner: "{{ item.username }}" 
     group: "{{ item.username }}" 
-    mode: "0600"
+    mode: "0700"
   with_items:  "{{ required_users }}"    
 
 - name: Remove Root SSH Configuration
